@@ -1,0 +1,71 @@
+1. Sorunun Kodu:
+
+#include <stdio.h>
+
+int findMinCoins(int coins[], int n, int total) {
+    int count = 0;
+
+    // En küçük madeni para biriminden başlayarak, her bir madeni para için adımı uygulayın.
+    for (int i = 0; i < n; i++) {
+        while (total >= coins[i]) {
+            // Madeni paranın değeri, toplam para miktarından çıkarın.
+            total -= coins[i];
+            count++;
+        }
+    }
+
+    // Toplam para miktarı tamamen oluşturulduysa, kullanılan madeni para sayısını döndürün.
+    if (total == 0) {
+        return count;
+    }
+    else {
+        return -1;
+    }
+}
+
+int main() {
+    int coins[] = {1, 5, 10, 25, 50};
+    int n = sizeof(coins)/sizeof(coins[0]);
+    int total = 83;
+    int result = findMinCoins(coins, n, total);
+
+    if (result == -1) {
+        printf("Verilen madeni paraların herhangi bir kombinasyonu ile %d TL oluşturulamaz.", total);
+    }
+    else {
+        printf("En az %d adet madeni para kullanılarak %d TL oluşturulabilir.", result, total);
+    }
+
+    return 0;
+}
+
+2. Sorunun Kodu:
+
+#include <stdio.h>
+
+int findZero(int num1, int num2) {
+    int count = 0;
+
+    while (num1 != 0 && num2 != 0) {
+        if (num1 >= num2) {
+            num1 -= num2;
+        } else {
+            num2 -= num1;
+        }
+        count++;
+    }
+
+    return count;
+}
+
+int main() {
+    int num1, num2;
+
+    printf("Enter two non-negative integers: ");
+    scanf("%d %d", &num1, &num2);
+
+    int count = findZero(num1, num2);
+    printf("Number of operations required to make either num1 or num2 zero: %d\n", count);
+
+    return 0;
+}
